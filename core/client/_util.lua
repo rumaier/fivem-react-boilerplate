@@ -20,3 +20,8 @@ end)
 RegisterNUICallback('fetchLocales', function(_, cb)
     cb(Language[Cfg.Language])
 end)
+
+RegisterNUICallback('fetchConfig', function(_, cb)
+    Cfg.IconPath = Core.Inventory.IconPath
+    cb(Cfg)
+end)
