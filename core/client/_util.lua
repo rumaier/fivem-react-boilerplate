@@ -13,6 +13,18 @@ if Cfg.Debug then
     SetTimeout(1000, initialize)
 end
 
+function NormalizeTargetData(data)
+    if type(data) ~= 'table' then
+        local entity = data
+        return {
+            entity = entity,
+            coords = GetEntityCoords(entity)
+        }
+    else
+        return data
+    end
+end
+
 RegisterNUICallback('setNuiFocus', function(focus, cb)
     cb(SetNuiFocus(focus, focus))
 end)
