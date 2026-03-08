@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import { addInitialFetch } from "../utils/initFetch";
 import { fetchNui } from "../utils/fetchNui";
+import { addInitialFetch } from "../utils/initFetch";
 
 export const useConfigStore = create<any>(() => ({}));
 
