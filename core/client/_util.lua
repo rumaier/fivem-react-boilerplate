@@ -17,6 +17,6 @@ RegisterNUICallback('setNuiFocus', function(focus, cb)
     cb(SetNuiFocus(focus, focus))
 end)
 
-RegisterNuiCallback('fetchLocales', function(_, cb)
+RegisterNUICallback('fetchLocales', function(_, cb)
     cb(Language[Cfg.Language])
 end)
