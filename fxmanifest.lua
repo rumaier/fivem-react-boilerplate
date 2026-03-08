@@ -27,8 +27,8 @@ client_scripts {
 -- ui_page 'web/build/index.html' -- uncomment if resource has nui built
 -- ui_page 'http://localhost:5173/' -- uncomment for vite dev server, remove in production
 files {
-    'web/build/index.html',
-    'web/build/**/*',
+    'web/dist/index.html',
+    'web/dist/**/*',
 }
 
 dependencies {
