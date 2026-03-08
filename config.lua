@@ -10,6 +10,6 @@
 Cfg = {}
 
 Cfg.Language = 'en'     -- Languages: 'en': English, 'es': Spanish, 'fr': French, 'de': German, 'pt': Portuguese, 'zh': Chinese
-Cfg.UiColor = 'blue'    -- Colors: 'dark', 'gray', 'red', 'pink', 'grape', 'violet', 'indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'yellow', 'orange'
+Cfg.NuiColor = 'blue'   -- Colors: 'dark', 'gray', 'red', 'pink', 'grape', 'violet', 'indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'yellow', 'orange'
 Cfg.VersionCheck = true -- Intermittent version checking (true: enabled, false: disabled)
 Cfg.Debug = true        -- Debug prints, not recommended for live servers (true: enabled, false: disabled)
