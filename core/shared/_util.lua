@@ -7,7 +7,7 @@ function locale(key, ...)
     end
     local string = Language[locale] and Language[locale][key]
     if not string then
-        return 'ERR_TRANSLATE_KEY_NOT_FOUND'
+        return 'ERR_TRANSLATE_'..locale..'_'..key
     end
     return string:format(...)
 end
