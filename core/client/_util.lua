@@ -9,10 +9,6 @@ end
 
 RegisterNetEvent(onPlayerLoaded, initialize)
 
-if Cfg.Debug then
-    SetTimeout(1000, initialize)
-end
-
 function NormalizeTargetData(data)
     if type(data) ~= 'table' then
         local entity = data
