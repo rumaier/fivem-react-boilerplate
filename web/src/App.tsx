@@ -8,13 +8,10 @@ import { runInitialFetches } from "./utils/initFetch";
 const App: FC = () => {
   const nuiColor = useConfigStore((state) => state.NuiColor);
 
-  const [mantineTheme, setMantineTheme] = useState<MantineTheme>(
-    mergeMantineTheme(theme, {
-      primaryColor: nuiColor,
-    }),
-  );
+  const [mantineTheme, setMantineTheme] = useState<MantineTheme>(theme);
 
   useEffect(() => {
+    if (!nuiColor) return;
     const newTheme = mergeMantineTheme(theme, {
       primaryColor: nuiColor,
     });
@@ -24,8 +21,6 @@ const App: FC = () => {
   useEffect(() => {
     runInitialFetches();
   }, []);
-
-  console.log('Current Mantine Theme:', mantineTheme);
 
   return (
     <MantineProvider theme={mantineTheme} forceColorScheme='dark'>
