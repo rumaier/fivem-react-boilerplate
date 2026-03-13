@@ -15,10 +15,10 @@ const App: FC = () => {
   );
 
   useEffect(() => {
-    setMantineTheme(
-      mergeMantineTheme(theme, {
-        primaryColor: nuiColor,
-      }));
+    const newTheme = mergeMantineTheme(theme, {
+      primaryColor: nuiColor,
+    });
+    setMantineTheme(newTheme);
   }, [nuiColor]);
 
   useEffect(() => {
