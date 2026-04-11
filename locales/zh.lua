@@ -6,6 +6,5 @@ Language['zh'] = { -- Simplified Chinese
     identifier = '标识符',
     
     startup_info = '%s | v%s',
-    cheater_print = '你试图智胜系统，但系统智胜了你。',
     debug_enabled = '^3调试模式已启用^0',
 }

@@ -8,16 +8,16 @@
 --
 local resource = GetCurrentResourceName()
 Cfg.LogsEnabled = true -- Enable or disable logging (true: enabled, false: disabled)
+Cfg.WebhookUrl = ''    -- Discord webhook URL
 
 function SendLog(src, info)
     if not Cfg.LogsEnabled then return end
+    if not Cfg.WebhookUrl or Cfg.WebhookUrl == '' then return end
     local isServer = (src == 0)
     local name = isServer and 'Server' or GetPlayerName(src)
-    local identifier = isServer and 'N/A' or Core.Framework.getPlayerIdentifier(src)
 
     -- Discord Webhook by default:
-    local url = '' -- change this to your webhook url
-    PerformHttpRequest(url, function()
+    PerformHttpRequest(Cfg.WebhookUrl, function()
     end, 'POST', json.encode({
         username = resource,
         avatar_url = 'https://i.ibb.co/N62P014g/logo-2.jpg',
@@ -43,7 +43,8 @@ function SendLog(src, info)
                         name = utf8.char(0x200B),
                         value = utf8.char(0x200B),
                         inline = true
-                    }
+                    },
+                    table.unpack(info.fields or {})
                 },
                 footer = {
                     text = resource
@@ -51,5 +52,5 @@ function SendLog(src, info)
                 timestamp = os.date('!%Y-%m-%dT%H:%M:%S')
             }
         }
-    }))
+    }), { ['Content-Type'] = 'application/json' })
 end

@@ -20,9 +20,9 @@ local function buildDatabase()
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci
         ]])
         if not built then
-            _debug('[^1ERROR^0] - Failed to build database for ' .. resource)
+            _error('Failed to build database for ' .. resource)
         else
-            _debug('[^2SUCCESS^0] - Database built for ' .. resource)
+            _debug('Database built for ' .. resource)
             DatabaseBuilt = true
         end
     else

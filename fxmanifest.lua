@@ -24,7 +24,7 @@ client_scripts {
     'core/client/*.lua',
 }
 
--- ui_page 'web/build/index.html' -- uncomment if resource has nui built
+-- ui_page 'web/dist/index.html' -- uncomment if resource has nui built
 -- ui_page 'http://localhost:5173/' -- uncomment for vite dev server, remove in production
 files {
     'web/dist/index.html',

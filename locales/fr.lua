@@ -6,6 +6,5 @@ Language['fr'] = { -- French
     identifier = 'Identifiant',
     
     startup_info = '%s | v%s',
-    cheater_print = 'Vous avez essayé de tromper le système, mais le système vous a trompé.',
     debug_enabled = '^3MODE DEBUG EST ACTIVÉ^0',
 }
