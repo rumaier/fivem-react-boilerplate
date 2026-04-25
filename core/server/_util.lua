@@ -1,4 +1,3 @@
-DatabaseBuilt = false
 Core = exports.r_bridge:returnCoreObject()
 
 local resource = GetCurrentResourceName()
@@ -10,24 +9,22 @@ local function checkVersion()
     SetTimeout(3600000, checkVersion)
 end
 
+local function onDatabaseBuilt()
+    -- fire off any database fetches etc
+end
+
 local function buildDatabase()
-    local built = MySQL.query.await('SHOW TABLES LIKE "' .. resource .. '"')
-    if #built == 0 then
-        built = MySQL.query.await([[
-        CREATE TABLE IF NOT EXISTS `]] .. resource .. [[` (
+    MySQL.query(string.format([[
+        CREATE TABLE IF NOT EXISTS `%s` (
             `example` varchar(50) NOT NULL,
             PRIMARY KEY (`example`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci
-        ]])
-        if not built then
-            _error('Failed to build database for ' .. resource)
-        else
-            _debug('Database built for ' .. resource)
-            DatabaseBuilt = true
+    ]], resource), function(resp)
+        if resp.warningStatus == 0 then
+            print('Database built for ' .. resource)
         end
-    else
-        DatabaseBuilt = true
-    end
+        onDatabaseBuilt()
+    end)
 end
 
 local function startupPrints()
@@ -42,7 +39,6 @@ end
 
 AddEventHandler('onResourceStart', function(resourceName)
     if resourceName ~= resource then return end
-    -- buildDatabase()
     startupPrints()
     checkVersion()
 end)
