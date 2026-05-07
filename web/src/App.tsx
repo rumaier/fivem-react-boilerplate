@@ -6,8 +6,8 @@ import { theme } from "./theme";
 import { runInitialFetches } from "./utils/initFetch";
 
 const App: FC = () => {
+  
   const nuiColor = useConfigStore((state) => state.NuiColor);
-
   const [mantineTheme, setMantineTheme] = useState<MantineTheme>(theme);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const App: FC = () => {
   return (
     <MantineProvider theme={mantineTheme} forceColorScheme='dark'>
       <ModalsProvider>
-        {/* App goes here */}
+        
       </ModalsProvider>
     </MantineProvider>
   );

@@ -16,13 +16,13 @@ const themeOverrides = createTheme({
   },
 
   lineHeights: {
-    xxs: '1.35',
-    xs: '1.4',
-    sm: '1.45',
-    md: '1.55',
-    lg: '1.6',
-    xl: '1.65',
-    xxl: '1.7',
+    xxs: '1.0',
+    xs: '1.1',
+    sm: '1.15',
+    md: '1.2',
+    lg: '1.3',
+    xl: '1.4',
+    xxl: '1.5',
   },
 
   radius: {
