@@ -1,10 +1,6 @@
 Language = Language or {}
-Language['de'] = { -- German
+Language['de'] = {
     
-    server_id = 'Server-ID',
-    username = 'Benutzername',
-    identifier = 'Identifikator',
-    
-    startup_info = '%s | v%s',
-    debug_enabled = '^3DEBUG-MODUS IST AKTIVIERT^0',
+    bridge_loaded = 'Bridge erfolgreich geladen.',
+    debug_enabled = 'Debug-Modus ist AN! Verwende dies NICHT in der Produktion!',
 }

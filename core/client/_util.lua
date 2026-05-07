@@ -1,20 +1,15 @@
-Core = exports.r_bridge:returnCoreObject()
+local bridge = exports.r_bridge
+Framework = bridge:getFrameworkObject()
+Inventory = bridge:getInventoryObject()
+Target = bridge:getTargetObject()
+Interface = bridge:getInterfaceObject()
+Natives = bridge:getNativesObject()
 
-local framework = Core.Framework.Current
-local onPlayerLoaded =  framework == 'es_extended' and 'esx:playerLoaded' or 'QBCore:Client:OnPlayerLoaded'
-
-local function initialize()
-    -- init functions
-end
-
-RegisterNetEvent(onPlayerLoaded, initialize)
-
-function NormalizeTargetData(data)
+function NormalizeTarget(data)
     if type(data) ~= 'table' then
-        local entity = data
         return {
-            entity = entity,
-            coords = GetEntityCoords(entity)
+            entity = data,
+            coords = GetEntityCoords(data),
         }
     else
         return data
@@ -22,7 +17,8 @@ function NormalizeTargetData(data)
 end
 
 RegisterNUICallback('setNuiFocus', function(focus, cb)
-    cb(SetNuiFocus(focus, focus))
+    SetNuiFocus(focus, focus)
+    cb(IsNuiFocused())
 end)
 
 RegisterNUICallback('fetchLocales', function(_, cb)
@@ -30,6 +26,6 @@ RegisterNUICallback('fetchLocales', function(_, cb)
 end)
 
 RegisterNUICallback('fetchConfig', function(_, cb)
-    Cfg.IconPath = Core.Inventory.IconPath
+    Cfg.IconPath = Inventory.getIconPath()
     cb(Cfg)
 end)

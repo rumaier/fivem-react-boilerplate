@@ -16,7 +16,7 @@ shared_scripts {
 }
 
 server_scripts {
-    -- '@oxmysql/lib/MySQL.lua', -- Uncomment if resource uses oxmysql
+    -- '@oxmysql/lib/MySQL.lua',
     'core/server/*.lua',
 }
 

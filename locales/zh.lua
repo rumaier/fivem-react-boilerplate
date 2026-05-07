@@ -1,10 +1,6 @@
 Language = Language or {}
-Language['zh'] = { -- Simplified Chinese
+Language['zh'] = {
     
-    server_id = '服务器 ID',
-    username = '用户名',
-    identifier = '标识符',
-    
-    startup_info = '%s | v%s',
-    debug_enabled = '^3调试模式已启用^0',
+    bridge_loaded = '桥接加载成功。',
+    debug_enabled = '调试模式已开启！请勿在生产环境中使用！',
 }
