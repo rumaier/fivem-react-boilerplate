@@ -36,7 +36,6 @@ dependencies {
 }
 
 escrow_ignore {
-    'core/server/logging.lua',
     'install/**/*.*',
     'locales/*.*',
     'config.lua'    
