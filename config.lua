@@ -5,7 +5,7 @@
 --   |_.__/ \___/|_|_|\___|_|  | .__/|_|\__,_|\__\___|
 --                             |_|
 --
---  Need support? Join our Discord server for help: YOUR_DISCORD_LINK
+--  Need support? Join our Discord server for help: https://discord.gg/TR38cZFdQk
 --
 Cfg = {}
 
