@@ -10,6 +10,11 @@ local function checkVersion()
     SetTimeout(3600000, checkVersion)
 end
 
+local function isBridgeCompatible()
+    local v = GetResourceMetadata('r_bridge', 'version', 0):gsub('%.', '')
+    return tonumber(v) >= 300
+end
+
 local function buildDb()
     MySQL.query(([[
         CREATE TABLE IF NOT EXISTS `%s` (
@@ -28,7 +33,11 @@ AddEventHandler('onResourceStart', function(name)
     if name ~= resource then return end
     print('------------------------------')
     print(resource .. ' | ' .. version)
-    if bridge then print('^2' .. locale('bridge_loaded') .. '^0') end
+    if bridge and isBridgeCompatible() then 
+        print('^2' .. locale('bridge_loaded') .. '^0')
+    else
+        print('^1' .. locale('update_bridge') .. '^0')
+    end
     if Cfg.Debug then print('^1' .. locale('debug_enabled') .. '^0') end
     print('------------------------------')
     checkVersion()
