@@ -28,7 +28,7 @@ AddEventHandler('onResourceStart', function(name)
     if name ~= resource then return end
     print('------------------------------')
     print(resource .. ' | ' .. version)
-    print('^2' .. locale('bridge_loaded') .. '^0')
+    if bridge then print('^2' .. locale('bridge_loaded') .. '^0') end
     if Cfg.Debug then print('^1' .. locale('debug_enabled') .. '^0') end
     print('------------------------------')
     checkVersion()
