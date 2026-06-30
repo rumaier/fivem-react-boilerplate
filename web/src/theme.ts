@@ -4,6 +4,9 @@ const themeOverrides = createTheme({
   primaryColor: 'blue',
   fontFamily: 'Rubik, sans-serif',
   defaultRadius: 'sm',
+  focusRing: 'never',
+  autoContrast: true,
+  luminanceThreshold: 0.5,
 
   fontSizes: {
     xxs: '0.625rem',
