@@ -1,10 +1,3 @@
-local bridge = exports.r_bridge
-Framework = bridge:getFrameworkObject()
-Inventory = bridge:getInventoryObject()
-Target = bridge:getTargetObject()
-Interface = bridge:getInterfaceObject()
-Natives = bridge:getNativesObject()
-
 function NormalizeTarget(data)
     if type(data) ~= 'table' then
         return {
@@ -26,6 +19,6 @@ RegisterNUICallback('fetchLocales', function(_, cb)
 end)
 
 RegisterNUICallback('fetchConfig', function(_, cb)
-    Cfg.IconPath = Inventory.getIconPath()
+    Cfg.IconPath = bridge.inventory.getIconPath()
     cb(Cfg)
 end)

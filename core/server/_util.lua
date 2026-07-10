@@ -1,17 +1,14 @@
-local bridge = exports.r_bridge
-Framework = bridge:getFrameworkObject()
-Inventory = bridge:getInventoryObject()
 local resource = GetCurrentResourceName()
 local version = GetResourceMetadata(resource, 'version', 0)
 
 local function checkVersion()
     if not Cfg.VersionCheck then return end
-    bridge:checkVersion(resource)
+    bridge.version.check(resource)
     SetTimeout(3600000, checkVersion)
 end
 
 local function isBridgeCompatible()
-    local v = GetResourceMetadata('r_bridge', 'version', 0):gsub('%.', '')
+    local v = bridge.version.current:gsub('%.', '')
     return tonumber(v) >= 300
 end
 
@@ -33,7 +30,7 @@ AddEventHandler('onResourceStart', function(name)
     if name ~= resource then return end
     print('------------------------------')
     print(resource .. ' | ' .. version)
-    if bridge and isBridgeCompatible() then 
+    if GetResourceState('r_bridge') == 'started' and isBridgeCompatible() then
         print('^2' .. locale('bridge_loaded') .. '^0')
     else
         print('^1' .. locale('update_bridge') .. '^0')
