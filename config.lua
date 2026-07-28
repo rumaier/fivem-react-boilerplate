@@ -7,9 +7,16 @@
 --
 --  Need support? Join our Discord server for help: https://discord.gg/TR38cZFdQk
 --
+--  Server-only config. Client-safe keys must be whitelisted in
+--  core/server/main.lua (getClientConfig). NUI receives a further subset via
+--  buildNuiConfig() in core/client/_util.lua.
+--
+--  Exception: UI-only resources with no sensitive fields (e.g. killfeed) may
+--  keep config in shared_scripts — do not default to that for economy/location data.
+--
 Cfg = {}
 
 Cfg.Language = 'en'     -- Languages: 'en': English, 'es': Spanish, 'fr': French, 'de': German, 'pt': Portuguese, 'zh': Chinese
 Cfg.NuiColor = 'violet' -- Colors: 'dark', 'gray', 'red', 'pink', 'grape', 'violet', 'indigo', 'blue', 'cyan', 'teal', 'green', 'lime', 'yellow', 'orange'
-Cfg.VersionCheck = true -- Intermittent version checking (boolean)
+Cfg.VersionCheck = true -- Intermittent version checking (boolean) — server-only, not sent to clients
 Cfg.Debug = true        -- Debug prints, not recommended for live servers (boolean)

@@ -11,18 +11,19 @@ version '1.0.0'
 shared_scripts {
     '@ox_lib/init.lua',
     '@r_bridge/init.lua',
-    'core/shared/*.lua',
+    'core/shared/_util.lua',
     'locales/*.lua',
-    'config.lua',
 }
 
 server_scripts {
-    -- '@oxmysql/lib/MySQL.lua',
-    'core/server/*.lua',
+    'config.lua',
+    'core/server/_util.lua',
+    'core/server/main.lua',
 }
 
 client_scripts {
-    'core/client/*.lua',
+    'core/client/_util.lua',
+    'core/client/main.lua',
 }
 
 -- ui_page 'web/dist/index.html' -- uncomment if resource has nui built
@@ -33,11 +34,12 @@ files {
 }
 
 dependencies {
-    'r_bridge'
+    'ox_lib',
+    'r_bridge',
 }
 
 escrow_ignore {
     'install/**/*.*',
     'locales/*.*',
-    'config.lua'    
+    'config.lua'
 }

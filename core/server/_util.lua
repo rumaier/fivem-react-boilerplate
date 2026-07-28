@@ -7,18 +7,17 @@ local function checkVersion()
     SetTimeout(3600000, checkVersion)
 end
 
-local function buildDb()
-    MySQL.query(([[
-        CREATE TABLE IF NOT EXISTS `%s` (
-            `example` varchar(50) NOT NULL,
-            PRIMARY KEY (`example`)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci
-    ]]):format(resource), function(resp)
-        if resp.warningStatus == 0 then
-            print('Database built for ' .. resource)
-        end
-    end)
-end
+-- Uncomment for MySQL resources:
+-- Add '@oxmysql/lib/MySQL.lua' to server_scripts in fxmanifest.lua
+-- local function buildDb()
+--     MySQL.query.await(([[
+--         CREATE TABLE IF NOT EXISTS `%s` (
+--             `example` varchar(50) NOT NULL,
+--             PRIMARY KEY (`example`)
+--         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci
+--     ]]):format(resource))
+--     -- Cache*() on resource start
+-- end
 
 AddEventHandler('onResourceStart', function(name)
     if name ~= resource then return end
@@ -29,7 +28,7 @@ AddEventHandler('onResourceStart', function(name)
     else
         print('^1' .. locale('update_bridge') .. '^0')
     end
-    if Cfg.Debug then print('^1' .. locale('debug_enabled') .. '^0') end
+    if Cfg and Cfg.Debug then print('^1' .. locale('debug_enabled') .. '^0') end
     print('------------------------------')
     checkVersion()
     -- buildDb()
