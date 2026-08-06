@@ -8,7 +8,7 @@
 --  Need support? Join our Discord server for help: https://discord.gg/TR38cZFdQk
 --
 --  Server-only config. Client-safe keys must be whitelisted in
---  core/server/main.lua (getClientConfig). NUI receives a further subset via
+--  core/server/_util.lua (getClientConfig). NUI receives a further subset via
 --  buildNuiConfig() in core/client/_util.lua.
 --
 --  Exception: UI-only resources with no sensitive fields (e.g. killfeed) may

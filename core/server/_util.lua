@@ -21,6 +21,14 @@ function SetCooldown(src, action)
     cooldowns[('%s:%s'):format(src, action)] = GetGameTimer()
 end
 
+lib.callback.register(resource .. ':getClientConfig', function()
+    return {
+        Language = Cfg.Language,
+        Debug = Cfg.Debug,
+        NuiColor = Cfg.NuiColor,
+    }
+end)
+
 local function checkVersion()
     if not Cfg.VersionCheck then return end
     bridge.version.check(resource)
