@@ -1,5 +1,15 @@
 local resource = GetCurrentResourceName()
 local version = GetResourceMetadata(resource, 'version', 0)
+local rateLimits = {}
+
+function IsRateLimited(src, action, duration)
+    local last = rateLimits[('%s:%s'):format(src, action)]
+    return last and GetGameTimer() - last < duration
+end
+
+function SetRateLimit(src, action)
+    rateLimits[('%s:%s'):format(src, action)] = GetGameTimer()
+end
 
 local function checkVersion()
     if not Cfg.VersionCheck then return end
@@ -32,4 +42,13 @@ AddEventHandler('onResourceStart', function(name)
     print('------------------------------')
     checkVersion()
     -- buildDb()
+end)
+
+AddEventHandler('playerDropped', function()
+    local src = source
+    for key in pairs(rateLimits) do
+        if key:match('^' .. src .. ':') then
+            rateLimits[key] = nil
+        end
+    end
 end)
