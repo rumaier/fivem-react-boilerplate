@@ -4,6 +4,7 @@ local LOG = {
     debug = { color = 6, tag = 'DEBUG', enabled = true },
     warn = { color = 3, tag = 'WARN', enabled = true },
     error = { color = 8, tag = 'ERROR', enabled = true },
+    success = { color = 2, tag = 'SUCCESS', enabled = true },
 }
 
 Language = Language or {}
@@ -20,8 +21,8 @@ function locale(key, ...)
     return string:format(...)
 end
 
----@param level 'debug' | 'warn' | 'error'
-function log(level, ...)
+---@param level 'debug' | 'warn' | 'error' | 'success'
+function log(level, ...) 
     local cfg = LOG[level]
     if not cfg then return end
     if level == 'debug' and not (Cfg and Cfg.Debug) then return end
