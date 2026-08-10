@@ -1,6 +1,7 @@
 import { MantineProvider, mergeMantineTheme, type MantineTheme } from "@mantine/core";
 import { ModalsProvider } from '@mantine/modals';
 import { useEffect, useState, type FC } from "react";
+import DevWrapper from "./components/DevWrapper";
 import { useConfigStore } from "./stores/config";
 import { theme } from "./theme";
 import { runInitialFetches } from "./utils/initFetch";
@@ -25,7 +26,9 @@ const App: FC = () => {
   return (
     <MantineProvider theme={mantineTheme} forceColorScheme='dark'>
       <ModalsProvider>
-        
+        <DevWrapper setTheme={setMantineTheme}>
+          
+        </DevWrapper>
       </ModalsProvider>
     </MantineProvider>
   );
