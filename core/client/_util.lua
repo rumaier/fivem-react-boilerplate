@@ -2,6 +2,11 @@ Cfg = Cfg or {}
 
 local resource = GetCurrentResourceName()
 
+local function onClientReady()
+    if not bridge.framework.isPlayerLoaded() then return end
+    TriggerEvent('r_bridge:playerLoaded')
+end
+
 local function loadClientConfig()
     local config
     for attempt = 1, 10 do
@@ -22,7 +27,7 @@ local function loadClientConfig()
                     for key, value in pairs(response) do
                         Cfg[key] = value
                     end
-                    TriggerEvent(resource .. ':clientConfigLoaded')
+                    onClientReady()
                     return
                 end
             end
@@ -32,7 +37,7 @@ local function loadClientConfig()
     for key, value in pairs(config) do
         Cfg[key] = value
     end
-    TriggerEvent(resource .. ':clientConfigLoaded')
+    onClientReady()
 end
 
 local function buildNuiConfig()
