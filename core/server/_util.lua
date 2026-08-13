@@ -38,13 +38,17 @@ end
 -- Uncomment for MySQL resources:
 -- Add '@oxmysql/lib/MySQL.lua' to server_scripts in fxmanifest.lua
 -- local function buildDb()
---     MySQL.query.await(([[
+--     local result = MySQL.query.await(([[
 --         CREATE TABLE IF NOT EXISTS `%s` (
---             `example` varchar(50) NOT NULL,
---             PRIMARY KEY (`example`)
+--             `identifier`       VARCHAR(46) NOT NULL,
+--             PRIMARY KEY (`identifier`),
+--             UNIQUE KEY `inmate_id` (`inmate_id`)
 --         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci
 --     ]]):format(resource))
---     -- Cache*() on resource start
+--     if result and result.warningStatus == 0 then
+--         log('success', 'Database built successfully')
+--     end
+--     Cache()
 -- end
 
 AddEventHandler('onResourceStart', function(name)
