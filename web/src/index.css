@@ -12,3 +12,11 @@ body {
 *:focus {
   outline: none;
 }
+
+.mantine-Modal-header {
+  background: var(--mantine-color-dark-8);
+}
+
+.mantine-Modal-content {
+  background: var(--mantine-color-dark-8);
+}
