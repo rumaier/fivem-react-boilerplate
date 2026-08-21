@@ -6,7 +6,7 @@ lua54 'yes'
 name 'resource_name'
 description 'resource_description'
 author 'author_name'
-version '1.0.0'
+version '0.9.9'
 
 shared_scripts {
     '@ox_lib/init.lua',
