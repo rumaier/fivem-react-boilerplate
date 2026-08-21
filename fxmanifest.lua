@@ -18,13 +18,11 @@ shared_scripts {
 server_scripts {
     -- '@oxmysql/lib/MySQL.lua',
     'config.lua',
-    'core/server/_util.lua',
-    'core/server/main.lua',
+    'core/server/*.lua',
 }
 
 client_scripts {
-    'core/client/_util.lua',
-    'core/client/main.lua',
+    'core/client/*.lua',
 }
 
 -- ui_page 'web/dist/index.html' -- uncomment if resource has nui built
