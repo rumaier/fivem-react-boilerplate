@@ -1,43 +1,49 @@
 Cfg = Cfg or {}
 
 local resource = GetCurrentResourceName()
+local getClientConfig = ('%s:getClientConfig'):format(resource)
 
 local function onClientReady()
     if not bridge.framework.isPlayerLoaded() then return end
     TriggerEvent('r_bridge:playerLoaded')
 end
 
-local function loadClientConfig()
-    local config
-    for attempt = 1, 10 do
-        local success, response = pcall(lib.callback.await, resource .. ':getClientConfig', false)
-        if success and type(response) == 'table' then
-            config = response
-            break
-        end
-        Wait(attempt * 250)
-    end
-    if not config then
-        print('^1[' .. resource .. ']^0 Failed to load client config; retrying in the background')
-        CreateThread(function()
-            while true do
-                Wait(1000)
-                local success, response = pcall(lib.callback.await, resource .. ':getClientConfig', false)
-                if success and type(response) == 'table' then
-                    for key, value in pairs(response) do
-                        Cfg[key] = value
-                    end
-                    onClientReady()
-                    return
-                end
-            end
-        end)
-        return
-    end
-    for key, value in pairs(config) do
-        Cfg[key] = value
+local function buildClientConfig(config)
+    for k, v in pairs(config) do
+        Cfg[k] = v
     end
     onClientReady()
+end
+
+local function backgroundFetchClientConfig()
+    CreateThread(function()
+        while true do
+            local resp = lib.callback.await(getClientConfig, false)
+            if resp and type(resp) == 'table' then
+                buildClientConfig(resp)
+                break
+            end
+            Wait(1000)
+        end
+    end)
+end
+
+local function fetchClientConfig()
+    local config = nil
+    for i = 1, 10 do
+        local resp = lib.callback.await(getClientConfig, false)
+        if resp and type(resp) == 'table' then
+            config = resp
+            break
+        end
+        Wait(i * 250)
+    end
+    if not config then
+        log('error', 'Failed to load client config; retrying in the background')
+        backgroundFetchClientConfig()
+    else
+        buildClientConfig(config)
+    end
 end
 
 local function buildNuiConfig()
@@ -69,4 +75,4 @@ RegisterNUICallback('fetchConfig', function(_, cb)
     cb(buildNuiConfig())
 end)
 
-loadClientConfig()
+fetchClientConfig()

@@ -21,22 +21,12 @@ function SetCooldown(src, action)
     cooldowns[('%s:%s'):format(src, action)] = GetGameTimer()
 end
 
-lib.callback.register(resource .. ':getClientConfig', function()
-    return {
-        Language = Cfg.Language,
-        Debug = Cfg.Debug,
-        NuiColor = Cfg.NuiColor,
-    }
-end)
-
 local function checkVersion()
     if not Cfg.VersionCheck then return end
     bridge.version.check(resource)
     SetTimeout(3600000, checkVersion)
 end
 
--- Uncomment for MySQL resources:
--- Add '@oxmysql/lib/MySQL.lua' to server_scripts in fxmanifest.lua
 -- local function buildDb()
 --     local result = MySQL.query.await(([[
 --         CREATE TABLE IF NOT EXISTS `%s` (
@@ -50,6 +40,14 @@ end
 --     end
 --     Cache()
 -- end
+
+lib.callback.register(resource .. ':getClientConfig', function()
+    return {
+        Language = Cfg.Language,
+        Debug = Cfg.Debug,
+        NuiColor = Cfg.NuiColor,
+    }
+end)
 
 AddEventHandler('onResourceStart', function(name)
     if name ~= resource then return end
